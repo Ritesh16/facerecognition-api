@@ -8,7 +8,7 @@ const db = knex({
     connection: {
       host : '127.0.0.1',
       user : 'postgres',
-      password : '',
+      password : 'test',
       database : 'smart-brain'
     }
   });
@@ -17,7 +17,12 @@ console.log(db.select('*').from('users'));
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.status(200).json("Api is running");
+});
 
 app.post('/register', (req, res) => {
     const {email, name, password} = req.body;
