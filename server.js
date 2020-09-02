@@ -7,12 +7,13 @@ const signin=require('./controllers/signin');
 const profile=require('./controllers/profile');
 const image=require('./controllers/image');
 
+
 const db = knex({
     client: 'pg',
     connection: {
       host : '127.0.0.1',
       user : 'postgres',
-      password : '',
+      password : 'test',
       database : 'smart-brain'
     }
   });
@@ -31,6 +32,7 @@ app.get('/profile/:id', (req, res) => {profile.handleProfile(req, res, db)} );
 
 // Update Enteries
 app.put('/image', (req, res) => {image.handleImage(req, res, db)});
+app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
 
 // Register
 app.post('/register', (req, res) => { register.handleRegister(req,res,db,bcrypt) });
